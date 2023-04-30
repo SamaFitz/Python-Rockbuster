@@ -1,2 +1,2 @@
 # Rockbuster
-SQL Queries for Rockbuster project
+SQL Queries for fictious movie rental company.
