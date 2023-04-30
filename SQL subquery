@@ -1,0 +1,35 @@
+SQL Expression using a subquery to show the top 5 customers in the top 5 countries. 
+
+SELECT 
+  d.country, 
+  COUNT(DISTINCT a.customer_id) AS all_customer_count,
+  COUNT(DISTINCT top_5_customers) AS top_customer_count
+ FROM country d
+    INNER JOIN city c ON c.country_id = d.country_id
+    INNER JOIN address b ON b.city_id = c.city_id
+    INNER customer a ON a.address_id = b.address_id
+    LEFT JOIN
+       (SELECT
+         a.customer_id,
+         a.first_name,
+         a.last_name,
+         b.address,
+         c.city,
+         d.country,
+         SUM(e.amount) AS total_amt_paid
+        FROM customer a
+            INNER JOIN address b ON a.address_id = b.address_id
+            INNER JOIN city c on b.city_id = c.city_id
+            INNER JOIN country d ON c.country = d.country_id
+            INNER JOIN payment e ON a.customer_id = e.customer_id
+        WHERE city IN
+        ('Aurora', 'Acua', 'Citrus Heights', 'Iwaki', 'Ambattur', 'Shanwei', 'So Leopoldo', 'Teboksary', 'Tianjin', 'Cianjur')
+        GROUP BY a.customer_id, a.first_name, a.last_name, b.address, c.city, d.country
+        ORDER BY total_amt_paid DESC
+        LIMIT 5) AS top_5_customersr ON d.country = top_5_customers.country
+ GROUP BY d.country
+ ORDER BY top_customer_count DESC
+ LIMIT 5
+         
+     
+        
