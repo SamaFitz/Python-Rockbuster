@@ -1,0 +1,19 @@
+A SQL Expression using a CTE which shows film_id, movie title, genre, movie rating and profit for the top 100 movies. 
+
+WITH movie_revenue_cte (film_id, title, name, rating, amount) AS
+  (SELECT
+    a. name,
+    c. film_id,
+    c. title, 
+    c. rating, 
+SUM(f.amount) AS total_revenue
+FROM category A
+  INNER JOIN film_category B ON a.category_id = b.category_id
+  INNER JOIN film C ON B.film_id = c.film_id
+  INNER JOIN inventory D ON c.film_id = d.film_id
+  INNER JOIN rental E ON d.inventory_id = e.inventory_id
+  GROUP BY a.name, c.film_id, c.title, c.rating, f.amount)
+SELECT name, film_id, title, rating, amount
+FROM movie_revenue_cte
+ORDER BY amount DESC
+LIMIT 100
