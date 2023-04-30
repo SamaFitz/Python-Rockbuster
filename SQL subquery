@@ -29,7 +29,7 @@ SELECT
         LIMIT 5) AS top_5_customersr ON d.country = top_5_customers.country
  GROUP BY d.country
  ORDER BY top_customer_count DESC
- LIMIT 5
+ LIMIT
          
      
         
