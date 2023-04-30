@@ -6,4 +6,4 @@
 
 ### Data
 ###### Opensource tutorial data from PostgreSQL available here.
-###### Visualizations can be found on [Tableau Public] (https://public.tableau.com/app/profile/samantha.fitzsimmons).
+###### Visualizations can be found on [Tableau Public](https://public.tableau.com/app/profile/samantha.fitzsimmons).
