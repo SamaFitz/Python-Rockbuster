@@ -1,0 +1,20 @@
+SQL Expressing using multiple joins to show top 5 customers in the top 10 cities who have spent the most. 
+
+SELECT 
+  a.customer_id, 
+  a.first_name, 
+  a.last_name, 
+  b.address, 
+  c.city, 
+  d.country, 
+  SUM(e.amount) AS total_amt_paid
+FROM customer a
+  INNER JOIN address b ON a.address_id = b.address_id
+  INNER JOIN city c ON b.city_id = c.city_id
+  INNER JOIN country d ON c.country_id = d.country_id
+  INNER JOIN payment e ON a.customer_id = e.customer_id
+ WHERE city IN
+ ('Aurora', 'Acua', 'Citrus Heights', 'Iwaki', 'Ambattur', 'Shanwei', 'So Leopoldo', 'Teboksary', 'Tianjin', 'Cianjur')
+ GROUP BY a.customer_id, a.first_name, a.last_name, b.address, c.city, d.country
+ ORDER BY total_amt_paid DESC
+ LIMIT 5
