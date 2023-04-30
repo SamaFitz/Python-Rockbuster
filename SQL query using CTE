@@ -7,10 +7,10 @@ WITH movie_revenue_cte (film_id, title, name, rating, amount) AS
     c. title, 
     c. rating, 
 SUM(f.amount) AS total_revenue
-FROM category A
-  INNER JOIN film_category B ON a.category_id = b.category_id
-  INNER JOIN film C ON B.film_id = c.film_id
-  INNER JOIN inventory D ON c.film_id = d.film_id
+FROM category a
+  INNER JOIN film_category b ON a.category_id = b.category_id
+  INNER JOIN film c ON B.film_id = c.film_id
+  INNER JOIN inventory d ON c.film_id = d.film_id
   INNER JOIN rental E ON d.inventory_id = e.inventory_id
   GROUP BY a.name, c.film_id, c.title, c.rating, f.amount)
 SELECT name, film_id, title, rating, amount
